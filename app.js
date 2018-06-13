@@ -22,9 +22,11 @@ function read(a) {
         html += "<b>" + htmlEntities(a) + "</b><br><br>";
         document.getElementById("div-result").innerHTML = "Resultado: ";
         document.getElementById("div-result").innerHTML += html;
+        alert(html)
     }
     catch (error) {
         document.getElementById("div-errors").innerHTML = error
+        alert(error)
     }
 }
 
