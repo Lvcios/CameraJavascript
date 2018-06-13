@@ -34,8 +34,10 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
      navigator.mediaDevices.getUserMedia(constraints)
      .then(function (stream) {
          urlMedia = window.URL.createObjectURL(stream)
-         video.src = urlMedia;
+         video.src = window.URL.createObjectURL(stream);
          video.play();
+         qrcode.decode(window.URL.createObjectURL(stream))
+         qrcode.callback = read;
      })
      .catch(function(error){
          document.getElementById("div-errors").innerHTML = ''
