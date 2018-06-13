@@ -11,8 +11,8 @@ var constraints = {
 
 function read(a) {
     try{
-        document.getElementById("div-result").innerHTML = "Resultado: ";
-        document.getElementById("div-result").innerHTML += a;
+        document.getElementById("div-errors").innerHTML = "Resultado: ";
+        document.getElementById("div-errors").innerHTML += a;
     }
     catch (error) {
         document.getElementById("div-errors").innerHTML = error
