@@ -40,8 +40,9 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 document.getElementById("btn-decode").addEventListener("click", function () {
     try{
         context.drawImage(video, 0, 0);
-        qrcode.decode(canvas.toDataURL())
-        qrcode.callback = read
+        document.getElementById("div-errors").innerHTML = canvas.toDataURL()
+        /*qrcode.decode(canvas.toDataURL())
+        qrcode.callback = read*/
     }
     catch (error) {
         document.getElementById("div-errors").innerHTML = ''
