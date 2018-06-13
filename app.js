@@ -22,7 +22,8 @@ function read(a) {
 var video = document.getElementById('video');
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
-var shot = canvas.getContext('shot');
+
+qrcode.callback = read
 
 var urlMedia 
 if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -40,11 +41,10 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
 document.getElementById("btn-decode").addEventListener("click", function () {
     try{
-        //context.drawImage(video, 0, 0);
+        context.drawImage(video, 0, 0);
         document.getElementById("div-errors").innerHTML = canvas.toDataURL()
-        shot.src = canvas.toDataURL()
-        /*qrcode.decode(canvas.toDataURL())
-        qrcode.callback = read*/
+        qrcode.decode(canvas.toDataURL())
+        qrcode.callback = read
     }
     catch (error) {
         document.getElementById("div-errors").innerHTML = ''
