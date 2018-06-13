@@ -17,15 +17,13 @@ function read(a) {
 }
 
 var video = document.getElementById('video');
-
+var urlMedia 
 if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
      navigator.mediaDevices.getUserMedia(constraints)
      .then(function (stream) {
-         var url = window.URL.createObjectURL(stream)
-         video.src = url;
+         urlMedia = window.URL.createObjectURL(stream)
+         video.src = urlMedia;
          video.play();
-         qrcode.decode(url)
-         qrcode.callback = read;
      })
      .catch(function(error){
          document.getElementById("div-errors").innerHTML = ''
@@ -34,4 +32,7 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 }
 
 
-
+$("#btn-decode").click(function (event) {
+    qrcode.decode(url)
+    qrcode.callback = read;
+})
