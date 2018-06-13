@@ -38,5 +38,13 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 }
 
 document.getElementById("btn-decode").addEventListener("click", function () {
-    context.drawImage(video, 0, 0, 640, 480);
+    try{
+        context.drawImage(video, 0, 0, 640, 480);
+        qrcode.decode(canvas.toDataURL())
+        qrcode.callback = read
+    }
+    catch (error) {
+        document.getElementById("div-errors").innerHTML = ''
+        document.getElementById("div-errors").innerHTML = error
+    }
 });
