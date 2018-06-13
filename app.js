@@ -20,6 +20,9 @@ function read(a) {
 }
 
 var video = document.getElementById('video');
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+
 var urlMedia 
 if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
      navigator.mediaDevices.getUserMedia(constraints)
@@ -27,8 +30,6 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
          urlMedia = window.URL.createObjectURL(stream)
          video.src = urlMedia;
          video.play();
-         qrcode.decode(urlMedia)
-         qrcode.callback = read;
      })
      .catch(function(error){
          document.getElementById("div-errors").innerHTML = ''
@@ -36,13 +37,6 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
      })
 }
 
-
-$("#btn-decode").click(function (event) {
-    try{
-        qrcode.decode(urlMedia)
-        qrcode.callback = read;
-    }
-    catch (error) {
-        document.getElementById("div-errors").innerHTML = error
-    }
-})
+document.getElementById("btn-decode").addEventListener("click", function () {
+    context.drawImage(video, 0, 0, 640, 480);
+});

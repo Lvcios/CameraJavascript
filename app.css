@@ -1,8 +1,9 @@
 ﻿#video{
     width:100%;
-    height:100px;
+    height:40%;
 }
 
-#qr-canvas{
-    display:none;
+#canvas{
+    width:100%;
+    height:40%;
 }
