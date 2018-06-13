@@ -33,6 +33,11 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
 
 $("#btn-decode").click(function (event) {
-    qrcode.decode(url)
-    qrcode.callback = read;
+    try{
+        qrcode.decode(url)
+        qrcode.callback = read;
+    }
+    catch (error) {
+        document.getElementById("div-errors").innerHTML = error
+    }
 })
