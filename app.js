@@ -37,7 +37,7 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
          video.src = window.URL.createObjectURL(stream);
          video.play();
          qrcode.decode(window.URL.createObjectURL(stream))
-         qrcode.callback = read;
+         //qrcode.callback = read;
      })
      .catch(function(error){
          document.getElementById("div-errors").innerHTML = ''
@@ -48,7 +48,7 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
 $("#btn-decode").click(function (event) {
     try{
-        qrcode.decode(urlMedia)
+        //qrcode.decode(urlMedia)
         qrcode.callback = read;
     }
     catch (error) {
