@@ -24,7 +24,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
          var ctx = canvas.getContext('2d');
          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
          var dataURI = canvas.toDataURL('image/jpeg');
-         document.getElementById("img-div").innerHTML = '<img id="img" width="640" height="480" src="' + dataURI + '"/>'
+         document.getElementById("img-div").innerHTML = '<img id="img" width="' + video.width + '" height="' + video.height + '" src="' + dataURI + '"/>'
      })
      .catch(function(error){
          errorDiv.innerHTML = error
@@ -45,7 +45,7 @@ document.getElementById("btn-decode").addEventListener("click", function () {
         var ctx = canvas.getContext('2d');
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
         var dataURI = canvas.toDataURL('image/jpeg');
-        document.getElementById("img-div").innerHTML = '<img id="img" width="640" height="480" src="' + dataURI + '"/>'
+        document.getElementById("img-div").innerHTML = '<img id="img" width="' + video.width + '" height="' + video.height + '" src="' + dataURI + '"/>'
 
         //$("img").attr("src", "qrcode.png")
         codeReader.decodeFromImage("img").then((result) => {
