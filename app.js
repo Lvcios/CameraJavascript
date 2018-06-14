@@ -26,7 +26,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
          video.play();
          //canvas.width = video.width;
          //canvas.height = video.height;
-         setPicture()
+         //setPicture()
      })
      .catch(function(error){
          errorDiv.innerHTML = error
