@@ -7,25 +7,12 @@ var constraints = {
             }
     }
 }
-
-
-function read(a) {
-    try{
-        document.getElementById("div-errors").innerHTML = "Resultado: ";
-        document.getElementById("div-errors").innerHTML += a;
-    }
-    catch (error) {
-        document.getElementById("div-errors").innerHTML = error
-    }
-}
-
+const codeReader = new ZXing.BrowserQRCodeReader()
 var video = document.getElementById('video');
-var canvas = document.getElementById('canvas');
-var context = canvas.getContext('2d');
+var img = document.getElementById('img')
+var errorDiv = document.getElementById('div-errors');
+var urlMedia
 
-qrcode.callback = read
-
-var urlMedia 
 if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
      navigator.mediaDevices.getUserMedia(constraints)
      .then(function (stream) {
@@ -34,20 +21,20 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
          video.play();
      })
      .catch(function(error){
-         document.getElementById("div-errors").innerHTML = ''
-         document.getElementById("div-errors").innerHTML = error
+         errorDiv.innerHTML = error
      })
 }
 
 document.getElementById("btn-decode").addEventListener("click", function () {
     try{
-        context.drawImage(video, 0, 0);
-        document.getElementById("div-errors").innerHTML = canvas.toDataURL()
-        qrcode.decode(canvas.toDataURL())
-        qrcode.callback = read
+        img.src = video.src
+        codeReader.decodeFromImage(img).then((result) => {
+            errorDiv.innerHTML = result.text
+        }).catch((err) => {
+            errorDiv.innerHTML = err
+        })
     }
     catch (error) {
-        document.getElementById("div-errors").innerHTML = ''
-        document.getElementById("div-errors").innerHTML = error
+        errorDiv.innerHTML = error
     }
 });
