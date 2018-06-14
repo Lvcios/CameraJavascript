@@ -49,7 +49,7 @@ function setPicture() {
     var ctx = canvas.getContext('2d');
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
     var dataURI = canvas.toDataURL('image/jpeg');
-    document.getElementById("img-div").innerHTML = '<img id="img" width="' + video.width + '" height="' + video.height + '" src="' + dataURI + '"/>'
+    document.getElementById("img-div").innerHTML = '<img id="img" style="display:none;" width="' + video.width + '" height="' + video.height + '" src="' + dataURI + '"/>'
 }
 
 //setInterval(function(){
