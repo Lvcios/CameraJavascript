@@ -44,7 +44,7 @@ document.getElementById("btn-decode").addEventListener("click", function () {
         //img.height = video.height;
 
         var dataURI = canvas.toDataURL('image/jpeg');
-        document.getElementById("img-div").innerHTML = '<img id="img" width="640" height="480" src="' + data
+        document.getElementById("img-div").innerHTML = '<img id="img" width="640" height="480" src="' + dataURI + '"/>'
 
         //$("img").attr("src", "qrcode.png")
         codeReader.decodeFromImage("img").then((result) => {
