@@ -13,10 +13,6 @@ var img = document.getElementById('img');
 var errorDiv = document.getElementById('div-errors');
 var urlMedia
 
-img.onload = function () {
-    img.src = this.src;
-}
-
 if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
      navigator.mediaDevices.getUserMedia(constraints)
      .then(function (stream) {
