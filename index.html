@@ -20,8 +20,8 @@
             <p>This example shows how to scan a QR code with ZXing javascript library from the device video camera. If more than one video input devices are available (for example front and back camera) the example shows how to read them and use a select to change the input device.</p>
 
             <div>
-                <a class="button" id="startButton">Start</a>
-                <a class="button" id="resetButton">Reset</a>
+                <button type="button" class="button" id="startButton">Start</button>
+                <button type="button" class="button" id="resetButton">Reset</button>
             </div>
 
             <div>
@@ -71,6 +71,7 @@
 						}
 
 						document.getElementById('startButton').addEventListener('click', () => {
+						    document.getElementById('result').textContent = 'click'
 							codeReader.decodeFromInputVideoDevice(firstDeviceId, 'video').then((result) => {
 								console.log(result)
 								document.getElementById('result').textContent = result.text
