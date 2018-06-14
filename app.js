@@ -42,7 +42,8 @@ document.getElementById("btn-decode").addEventListener("click", function () {
         
         //img.width = video.width;
         //img.height = video.height;
-
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
         var dataURI = canvas.toDataURL('image/jpeg');
         document.getElementById("img-div").innerHTML = '<img id="img" width="640" height="480" src="' + dataURI + '"/>'
 
