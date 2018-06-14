@@ -26,8 +26,16 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 }
 
 document.getElementById("btn-decode").addEventListener("click", function () {
-    try{
-        img.src = video.src
+    try {
+        var canvas = document.createElement('canvas');
+        canvas.width = 640;
+        canvas.height = 480;
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        var dataURI = canvas.toDataURL('image/jpeg');
+
+        img.src = dataURI
+
         codeReader.decodeFromImage(img).then((result) => {
             errorDiv.innerHTML = result.text
         }).catch((err) => {
