@@ -57,7 +57,7 @@
 				codeReader.getVideoInputDevices()
 					.then((videoInputDevices) => {
 						const sourceSelect = document.getElementById('sourceSelect')
-						const firstDeviceId = videoInputDevices[1].deviceId
+						const firstDeviceId = videoInputDevices[0].deviceId
 						if (videoInputDevices.length > 1) {
 							videoInputDevices.forEach((element) => {
 								const sourceOption = document.createElement('option')
@@ -71,13 +71,13 @@
 						}
 
 						document.getElementById('startButton').addEventListener('click', () => {
-						    document.getElementById('result').textContent = 'click'
+						    document.getElementById('result').innerHTML = 'click'
 							codeReader.decodeFromInputVideoDevice(firstDeviceId, 'video').then((result) => {
 								console.log(result)
-								document.getElementById('result').textContent = result.text
+								document.getElementById('result').innerHTML = result.text
 							}).catch((err) => {
 								console.error(err)
-								document.getElementById('result').textContent = err
+								document.getElementById('result').innerHTML = err
 							})
 							console.log(`Started continous decode from camera with id ${firstDeviceId}`)
 						})
