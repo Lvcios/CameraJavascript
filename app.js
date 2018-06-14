@@ -21,10 +21,8 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
          video.play();
          canvas.width = video.width;
          canvas.height = video.height;
-         var ctx = canvas.getContext('2d');
-         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-         var dataURI = canvas.toDataURL('image/jpeg');
-         document.getElementById("img-div").innerHTML = '<img id="img" width="' + video.width + '" height="' + video.height + '" src="' + dataURI + '"/>'
+         
+         setTimeout(setPicture, 1000)
      })
      .catch(function(error){
          errorDiv.innerHTML = error
@@ -33,24 +31,8 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
 document.getElementById("btn-decode").addEventListener("click", function () {
     try {
-        //var canvas = document.createElement('canvas');
-        //canvas.width = video.width;
-        //canvas.height = video.height;
-        //var ctx = canvas.getContext('2d');
-        //ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        //var dataURI = canvas.toDataURL('image/jpeg');
-        
-        //img.width = video.width;
-        //img.height = video.height;
-        var ctx = canvas.getContext('2d');
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        var dataURI = canvas.toDataURL('image/jpeg');
-        document.getElementById("img-div").innerHTML = '<img id="img" width="' + video.width + '" height="' + video.height + '" src="' + dataURI + '"/>'
-
-        //$("img").attr("src", "qrcode.png")
+        setPicture()
         codeReader.decodeFromImage("img").then((result) => {
-            console.log(result)
-            console.log(JSON.stringify(result))
             errorDiv.innerHTML = JSON.stringify(result)
 
         }).catch((error) => {
@@ -63,6 +45,12 @@ document.getElementById("btn-decode").addEventListener("click", function () {
     }
 });
 
+function setPicture() {
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    var dataURI = canvas.toDataURL('image/jpeg');
+    document.getElementById("img-div").innerHTML = '<img id="img" width="' + video.width + '" height="' + video.height + '" src="' + dataURI + '"/>'
+}
 
 //setInterval(function(){
 //    img.src = 'qrcode.png?date=' + new Date().getTime();    
