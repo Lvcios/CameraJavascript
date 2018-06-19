@@ -70,7 +70,7 @@
 						
 					})
 					.catch((err) => {
-						console.error(err)
+					    document.getElementById('result').innerHTML = err
 					})
 			})
 
@@ -82,7 +82,6 @@
 			    codeReader.decodeFromInputVideoDevice(firstDeviceId, 'video').then((result) => {
 			        document.getElementById('result').innerHTML = result.text
 			    }).catch((err) => {
-			        console.error(err)
 			        document.getElementById('result').innerHTML = err
 			    })
 			}
