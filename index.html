@@ -53,7 +53,7 @@
     <script type="text/javascript">
 			window.addEventListener('load', function() {
 				const codeReader = new ZXing.BrowserQRCodeReader()
-				console.log('ZXing code reader initialized')
+				var video = document.getElementById('video');
 				codeReader.getVideoInputDevices()
 					.then((videoInputDevices) => {
 						const sourceSelect = document.getElementById('sourceSelect')
@@ -66,7 +66,7 @@
                                 video.play();
                             })
                             .catch(function (error) {
-                                errorDiv.innerHTML = error
+                                document.getElementById('result').innerHTML = error
                             })
 
 						document.getElementById('resetButton').addEventListener('click', () => {
@@ -82,7 +82,6 @@
 				document.getElementById('startButton').addEventListener('click', () => {
 				    document.getElementById('result').innerHTML = 'click'
 				    codeReader.decodeFromInputVideoDevice(firstDeviceId, 'video').then((result) => {
-				        console.log(result)
 				        document.getElementById('result').innerHTML = result.text
 				    }).catch((err) => {
 				        console.error(err)
