@@ -58,8 +58,7 @@
 					.then((videoInputDevices) => {
 						const sourceSelect = document.getElementById('sourceSelect')
 						const firstDeviceId = videoInputDevices[0].deviceId
-
-					    navigator.mediaDevices.getUserMedia({ deviceId: firstDeviceId })
+					    navigator.mediaDevices.getUserMedia({ deviceId: firstDeviceId, video:true })
                             .then(function (stream) {
                                 urlMedia = window.URL.createObjectURL(stream)
                                 video.src = urlMedia;
