@@ -17,20 +17,12 @@
         <section class="container" id="demo-content">
             <h1 class="title">Scan QR Code from Video Camera</h1>
 
-            <p>This example shows how to scan a QR code with ZXing javascript library from the device video camera. If more than one video input devices are available (for example front and back camera) the example shows how to read them and use a select to change the input device.</p>
-
             <div>
                 <button type="button" class="button" id="startButton">Start</button>
-                <button type="button" class="button" id="resetButton">Reset</button>
             </div>
 
             <div>
                 <video id="video" width="300" height="200" style="border: 1px solid gray" autoplay></video>
-            </div>
-
-            <div id="sourceSelectPanel" style="display:none">
-                <label for="sourceSelect">Change video source:</label>
-                <select id="sourceSelect" style="max-width:400px"></select>
             </div>
 
             <label>Result:</label>
@@ -51,32 +43,54 @@
 
     <script type="text/javascript" src="zxing.qrcodereader.js"></script>
     <script type="text/javascript">
+        var video = document.getElementById('video');
+        var firstDeviceId = ''
+        var urlMedia
+        var constraints = {
+            audio: false,
+            video: {
+                facingMode:
+                    {
+                        exact: "environment"
+                    }
+            }
+        }
+        const codeReader = new ZXing.BrowserQRCodeReader()
+        navigator.mediaDevices.getUserMedia(constraints)
+            .then(function (stream) {
+                urlMedia = window.URL.createObjectURL(stream)
+                video.src = urlMedia;
+                video.play();
+            })
+            .catch(function (error) {
+                document.getElementById('result').innerHTML = error
+            })
+
+            
 			window.addEventListener('load', function() {
-				const codeReader = new ZXing.BrowserQRCodeReader()
-				console.log('ZXing code reader initialized')
 				codeReader.getVideoInputDevices()
 					.then((videoInputDevices) => {
 						const sourceSelect = document.getElementById('sourceSelect')
-						const firstDeviceId = videoInputDevices[0].deviceId
+						firstDeviceId = videoInputDevices[0].deviceId
 						
-						codeReader.decodeFromInputVideoDevice(firstDeviceId, 'video').then((result) => {
-						    console.log(result)
-						    document.getElementById('result').innerHTML = result.text
-						}).catch((err) => {
-						    console.error(err)
-						    document.getElementById('result').innerHTML = err
-						})
-
-						document.getElementById('resetButton').addEventListener('click', () => {
-							codeReader.reset()
-							console.log('Reset.')
-						})
-
 					})
 					.catch((err) => {
 						console.error(err)
 					})
 			})
+
+			document.getElementById("startButton").addEventListener("click", function () {
+			    decode()
+			});
+
+			function decode() {
+			    codeReader.decodeFromInputVideoDevice(firstDeviceId, 'video').then((result) => {
+			        document.getElementById('result').innerHTML = result.text
+			    }).catch((err) => {
+			        console.error(err)
+			        document.getElementById('result').innerHTML = err
+			    })
+			}
     </script>
 
 </body>
