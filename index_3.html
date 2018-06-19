@@ -58,17 +58,16 @@
 					.then((videoInputDevices) => {
 						const sourceSelect = document.getElementById('sourceSelect')
 						const firstDeviceId = videoInputDevices[0].deviceId
-						if (videoInputDevices.length > 1) {
-							videoInputDevices.forEach((element) => {
-								const sourceOption = document.createElement('option')
-								sourceOption.text = element.label
-								sourceOption.value = element.deviceId
-								sourceSelect.appendChild(sourceOption)
-							})
-
-							const sourceSelectPanel = document.getElementById('sourceSelectPanel')
-							sourceSelectPanel.style.display = 'block'
-						}
+						
+					    navigator.mediaDevices.getUserMedia({ deviceId: firstDeviceId })
+                            .then(function (stream) {
+                                urlMedia = window.URL.createObjectURL(stream)
+                                video.src = urlMedia;
+                                video.play();
+                            })
+                            .catch(function (error) {
+                                errorDiv.innerHTML = error
+                            })
 
 						document.getElementById('startButton').addEventListener('click', () => {
 						    document.getElementById('result').innerHTML = 'click'
