@@ -69,18 +69,6 @@
                                 errorDiv.innerHTML = error
                             })
 
-						document.getElementById('startButton').addEventListener('click', () => {
-						    document.getElementById('result').innerHTML = 'click'
-							codeReader.decodeFromInputVideoDevice(firstDeviceId, 'video').then((result) => {
-								console.log(result)
-								document.getElementById('result').innerHTML = result.text
-							}).catch((err) => {
-								console.error(err)
-								document.getElementById('result').innerHTML = err
-							})
-							console.log(`Started continous decode from camera with id ${firstDeviceId}`)
-						})
-
 						document.getElementById('resetButton').addEventListener('click', () => {
 							codeReader.reset()
 							console.log('Reset.')
@@ -90,6 +78,19 @@
 					.catch((err) => {
 						console.error(err)
 					})
+
+				document.getElementById('startButton').addEventListener('click', () => {
+				    document.getElementById('result').innerHTML = 'click'
+				    codeReader.decodeFromInputVideoDevice(firstDeviceId, 'video').then((result) => {
+				        console.log(result)
+				        document.getElementById('result').innerHTML = result.text
+				    }).catch((err) => {
+				        console.error(err)
+				        document.getElementById('result').innerHTML = err
+				    })
+				    console.log(`Started continous decode from camera with id ${firstDeviceId}`)
+				})
+
 			})
     </script>
 
