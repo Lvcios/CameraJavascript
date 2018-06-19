@@ -2127,7 +2127,10 @@
                             }
                         } : {
                             video: {
-                                deviceId: e
+                                facingMode:
+                                    {
+                                        exact: "environment"
+                                    }
                             }
                         };
                         var r = this;
